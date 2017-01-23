@@ -1,0 +1,53 @@
+---
+title: "期中作業ggplot2"
+author: "蘇新堯"
+date: "2017年1月23日"
+output: html_document
+---
+#資料概觀
+我使用`economics`資料集
+```{r echo=FALSE}
+library(ggplot2)
+```
+
+它的資訊如下
+
+```{r}
+str(msleep)
+```
+        
+##繪製圖
+
+  **散佈圖**
+  
+```{r message=FALSE}
+library(ggplot2)
+ggplot(msleep,aes(x=sleep_total,y=bodywt,color=order))+geom_point()
+```
+  
+  **長條圖**
+  
+```{r}
+  ggplot(msleep ,aes(x=name,y=sleep_total))+geom_bar(stat = "identity")+coord_flip()
+```
+  
+  **柱狀圖**
+  
+```{r message=FALSE}  
+ggplot(msleep, aes(x = sleep_total)) +geom_histogram(aes(fill=vore))
+```
+
+###加入互動性的繪製圖
+  
+  **線圖**
+
+```{r}
+library(plotly)
+ ggplotly(ggplot(msleep,aes(x=sleep_total,y=bodywt))+geom_line(color="blue")+xlab("total sleep")+ylab("bodyweight")+ggtitle("correlation between sleep and bodyweight of mammals"))
+```
+
+  **盒鬚圖**
+```{r}
+ ggplotly(ggplot(msleep,aes(x=vore,y=sleep_total))+geom_boxplot()+xlab("vore")+ylab("total sleep")+ggtitle("correlation between sleep and type of vore"))
+```
+***This is the end of this report***
